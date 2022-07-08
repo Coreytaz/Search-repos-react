@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/Search-repos-react/static/css/main.ec194bb9.css",
+    "main.js": "/Search-repos-react/static/js/main.a140c9b1.js",
+    "index.html": "/Search-repos-react/index.html",
+    "main.ec194bb9.css.map": "/Search-repos-react/static/css/main.ec194bb9.css.map",
+    "main.a140c9b1.js.map": "/Search-repos-react/static/js/main.a140c9b1.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.ec194bb9.css",
+    "static/js/main.a140c9b1.js"
+  ]
+}
