@@ -32,12 +32,26 @@ function App() {
   };
 
   React.useEffect(() => {
-    getRepo();
-  }, []);
+    const delayDebounceFn = setTimeout(() => {
+      getRepo();
+    }, 500);
 
+    return () => clearTimeout(delayDebounceFn);
+  }, [search]);
+
+  const handleSubmit = (e) => {
+    if (e.keyCode === 13) {
+      return getRepo();
+    }
+  };
   return (
     <>
-      <Header search={search} getRepo={getRepo} setSearch={setSearch} />
+      <Header
+        search={search}
+        handleSubmit={handleSubmit}
+        getRepo={getRepo}
+        setSearch={setSearch}
+      />
       <main>
         <Repos repos={repos} isLoading={isLoading} />
       </main>

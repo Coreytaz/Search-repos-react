@@ -1,17 +1,22 @@
 import React from "react";
 import style from "./Header.module.css";
 
-const Header = ({ search, setSearch, getRepo }) => {
+const Header = ({ search, setSearch, getRepo, handleSubmit }) => {
   return (
     <header>
-      <div className={style.logo}>ReactRepos</div>
-      <div className={style.logoSmall}>RR</div>
+      <div className={style.logo} onClick={() => setSearch("")}>
+        ReactRepos
+      </div>
+      <div className={style.logoSmall} onClick={() => setSearch("")}>
+        RR
+      </div>
       <div className={style.search}>
         <input
           type="text"
           placeholder="Search..."
           onChange={(e) => setSearch(e.target.value)}
           value={search}
+          onKeyDown={(e) => handleSubmit(e)}
         />
         <button onClick={() => getRepo()}>
           <svg
