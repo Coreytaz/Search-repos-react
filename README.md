@@ -1,70 +1,56 @@
-# Getting Started with Create React App
+# ReactRepos
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Поиск публичных репозиториев через GitHub Search API. Интерфейс переведён на **React 19, TypeScript, Vite и pnpm**. Дизайн сохранил исходную красную тему, но результаты доступны и на устройствах без hover.
 
-## Available Scripts
+## Требования
 
-In the project directory, you can run:
+- Node.js >= 22.12
+- pnpm 12 (рекомендуется Corepack)
 
-### `npm start`
+```bash
+corepack enable
+corepack prepare pnpm@12.14.0 --activate
+pnpm install
+pnpm dev
+```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+После запуска откройте адрес, выведенный Vite (обычно http://localhost:5173).
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Команды
 
-### `npm test`
+| Команда | Описание |
+| --- | --- |
+| `pnpm dev` | Сервер разработки / React Fast Refresh |
+| `pnpm typecheck` | Строгая проверка TypeScript |
+| `pnpm lint` | ESLint |
+| `pnpm format:check` | Проверка форматирования Prettier |
+| `pnpm test` | Unit и компонентные тесты Vitest |
+| `pnpm build` | Проверка TS + production Vite build в `dist/` |
+| `pnpm preview` | Локальный просмотр production-сборки |
+| `pnpm deploy` | GitHub Pages в ветку `gh-pages` |
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Deploy на GitHub Pages
 
-### `npm run build`
+В репозитории `Coreytaz/Search-repos-react` соберите с префиксом репозитория:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```bash
+GITHUB_PAGES=true pnpm deploy
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+`vite.config.ts` использует `base: '/Search-repos-react/'` при `GITHUB_PAGES=true` и `base: '/'` при обычном запуске. Для Windows PowerShell:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```powershell
+$env:GITHUB_PAGES = 'true'; pnpm deploy; Remove-Item Env:GITHUB_PAGES
+```
 
-### `npm run eject`
+## Архитектура
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- `src/services/github.ts` — GitHub API, обработка ошибок и проверка ответов;
+- `src/hooks/useRepositorySearch.ts` — управление запросами, отмена и защита от гонок;
+- `src/types/github.ts` — модели API;
+- `src/components` — поиск и карточки результатов;
+- `src/utils` — форматирование чисел.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Запрос отправляется через 500 мс после ввода или немедленно по Enter/кнопке. GitHub API доступен без токена, но применяет лимиты частоты запросов. Приложение не использует сервер и не хранит ключи доступа.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+**Стили:** шапка, поле поиска, карточки репозиториев и состояния загрузки переработаны для маленьких экранов, планшетов и десктопов. Старые файлы CRA/JSX удалены, чтобы их не путали с актуальной реализацией. В проекте используется существующий `pnpm-lock.yaml` (исправлена ошибка с двойным YAML-документом). Для установки используйте `pnpm install --frozen-lockfile`.

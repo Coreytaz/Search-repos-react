@@ -1,84 +1,282 @@
-header {
-    position: fixed;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    top: 0;
-    width: 100%;
-    padding: 20px;
-    box-sizing: border-box;
-    background: #dd3543;
-    z-index: 100;
+.header {
+  position: relative;
+  background: radial-gradient(ellipse at 50% 70%, #eee7fb70, transparent 65%);
+  border-bottom: 1px solid var(--color-border);
 }
-
+.inner {
+  width: min(calc(100% - 64px), var(--layout-width));
+  margin-inline: auto;
+}
+.navigation {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 94px;
+  gap: 20px;
+  border-bottom: 1px solid var(--color-border);
+}
+.skipLink {
+  position: absolute;
+  top: -100px;
+  left: 16px;
+  z-index: 5;
+  padding: 10px 16px;
+  border-radius: 8px;
+  background: white;
+  text-decoration: none;
+}
+.skipLink:focus {
+  top: 8px;
+}
 .logo {
-    font-size: 2rem;
-    display: inline-block;
-    padding: 20px 30px;
-    background: #f35b66;
-    color: #fff;
-    transition: all 0.2s;
-    cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--color-text);
+  font-size: 1.3rem;
+  font-weight: 750;
+  letter-spacing: -0.055em;
 }
-
-.logoSmall {
-    display: none;
-    font-size: 2rem;
-    padding: 10px 20px;
-    background: #f35b66;
-    color: #fff;
-    transition: all 0.2s;
+.logoMark {
+  display: grid;
+  place-items: center;
+  width: 37px;
+  height: 37px;
+  border-radius: 11px;
+  background: var(--color-brand);
+  color: white;
+  box-shadow: 0 3px 7px #7452d622;
+}
+.logoFull > span {
+  color: var(--color-brand);
+}
+.logoShort {
+  display: none;
+}
+.githubLink {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: var(--color-muted);
+  font-size: 0.8rem;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.githubLink:hover {
+  color: var(--color-brand-dark);
+}
+.hero {
+  padding: 57px 0 49px;
+  text-align: center;
+}
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 20px;
+  padding: 6px 11px;
+  border: 1px solid #e6dff3;
+  border-radius: 30px;
+  background: #f5f0fb;
+  color: #7857ae;
+  font-size: 0.62rem;
+  font-weight: 650;
+  letter-spacing: 0.13em;
+}
+.eyebrow > span {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #9272ce;
+}
+.hero h1 {
+  margin: 0;
+  font-size: clamp(2rem, 4.1vw, 3.25rem);
+  line-height: 1.18;
+  font-weight: 750;
+  letter-spacing: -0.055em;
+}
+.hero h1 > span {
+  color: var(--color-brand);
+}
+.description {
+  margin: 20px 0 29px;
+  color: var(--color-muted);
+  font-size: 0.95rem;
+  line-height: 1.8;
 }
 .search {
-    display: flex;
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  width: min(100%, 670px);
+  min-height: 64px;
+  margin: 0 auto;
+  padding: 7px;
+  border: 1px solid #dfd9e9;
+  border-radius: 15px;
+  background: white;
+  box-shadow:
+    0 5px 8px #33204c03,
+    0 10px 32px #5a39790a;
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
 }
-
+.search:focus-within {
+  border-color: #9d80db;
+  box-shadow:
+    0 0 0 4px #7452d610,
+    0 10px 32px #5a39790a;
+}
+.inputIcon {
+  flex: 0 0 21px;
+  margin-left: 12px;
+  color: #9890a7;
+}
 .search input {
-    font-family: inherit;
-    width: 100%;
-    border: 0;
-    border-bottom: 2px solid white;
-    outline: 0;
-    font-size: 1.3rem;
-    color: white;
-    padding: 7px 0;
-    background: transparent;
-    transition: border-color 0.2s;
+  flex: 1 1 0%;
+  width: 100%;
+  min-width: 0;
+  min-height: 46px;
+  padding: 0;
+  border: 0;
+  outline: none;
+  background: transparent;
+  color: var(--color-text);
+  font-size: 0.9rem;
+  appearance: none;
 }
-
 .search input::placeholder {
-    color: #e0dbdb;
+  color: #9993a3;
+  opacity: 1;
 }
-
-.search button {
-    fill: white;
-    border: none;
-    background: #dd3543;
-    cursor: pointer;
+.searchButton {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  min-height: 46px;
+  padding: 0 23px;
+  border: 0;
+  border-radius: 10px;
+  background: var(--color-brand);
+  color: white;
+  font-size: 0.85rem;
+  font-weight: 600;
+  transition:
+    background 0.2s,
+    transform 0.2s;
 }
-
-.search button:hover img {
-    transform: rotate(10deg);
+.searchButton:hover {
+  background: var(--color-brand-dark);
 }
-
-.search button svg {
-    fill: white;
-    transition: all 0.5 ease-in-out;
+.searchButton:active {
+  transform: scale(0.97);
 }
-
-.search button svg:hover {
-    fill: rgb(247, 171, 171);
-    transform: rotate(10deg);
+.searchButton > span:last-child {
+  font-size: 1.1rem;
 }
-
-@media (max-width: 768px) {
-    header {
-        gap: 0 10px;
-    }
-    .logo {
-        display: none;
-    }
-    .logoSmall {
-        display: block;
-    }
+.suggestions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin-top: 18px;
+}
+.suggestions > span {
+  color: var(--color-subtle);
+  font-size: 0.73rem;
+  margin-right: 4px;
+}
+.suggestions button {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 30px;
+  padding: 4px 10px;
+  border: 1px solid #e6e0ee;
+  border-radius: 7px;
+  background: #ffffff80;
+  color: #777080;
+  font-size: 0.7rem;
+  transition:
+    background 0.2s,
+    border-color 0.2s;
+}
+.suggestions button > span {
+  color: #aaa1b8;
+}
+.suggestions button:hover {
+  background: #f0eafa;
+  border-color: #c5b4e7;
+  color: var(--color-brand-dark);
+}
+@media (max-width: 680px) {
+  .inner {
+    width: calc(100% - 32px);
+  }
+  .navigation {
+    min-height: 76px;
+  }
+  .githubLink {
+    font-size: 0.7rem;
+    gap: 5px;
+  }
+  .logo {
+    font-size: 1.15rem;
+  }
+  .logoMark {
+    width: 33px;
+    height: 33px;
+  }
+  .hero {
+    padding: 39px 0 33px;
+  }
+  .hero h1 {
+    font-size: clamp(1.65rem, 6.5vw, 2.5rem);
+  }
+  .description {
+    font-size: 0.81rem;
+    margin-block: 18px 24px;
+  }
+  .search {
+    gap: 8px;
+    min-height: 58px;
+    padding: 5px;
+    border-radius: 12px;
+  }
+  .inputIcon {
+    margin-left: 7px;
+    width: 18px;
+    flex-basis: 18px;
+  }
+  .search input {
+    font-size: 0.8rem;
+  }
+  .searchButton {
+    padding-inline: 15px;
+    gap: 10px;
+  }
+  .suggestions {
+    gap: 6px;
+    margin-top: 14px;
+  }
+  .suggestions > span {
+    width: 100%;
+    margin-bottom: 2px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .search,
+  .searchButton,
+  .suggestions button,
+  .githubLink {
+    transition: none;
+  }
 }

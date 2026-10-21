@@ -1,10 +1,35 @@
-body {
-    margin: 0;
+.page-main {
+  width: min(calc(100% - 64px), var(--layout-width));
+  min-width: 0;
+  margin-inline: auto;
+  padding-block: 38px 64px;
+  flex: 1;
 }
-
-main {
-    display: block;
-    padding-top: 210px;
-    max-width: 1080px;
-    margin: 0 auto;
+.page-footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  width: min(calc(100% - 64px), var(--layout-width));
+  margin-inline: auto;
+  padding: 23px 0 26px;
+  border-top: 1px solid var(--color-border);
+  color: var(--color-subtle);
+  font-size: 0.76rem;
+}
+.page-footer a {
+  text-decoration: none;
+}
+.page-footer a:hover {
+  color: var(--color-brand-dark);
+}
+@media (max-width: 680px) {
+  .page-main {
+    width: calc(100% - 32px);
+    padding-block: 24px 40px;
+  }
+  .page-footer {
+    width: calc(100% - 32px);
+    flex-wrap: wrap;
+    font-size: 0.7rem;
+  }
 }
