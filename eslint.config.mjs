@@ -9,8 +9,11 @@ export default tseslint.config(
   js.configs.recommended,
   ...tseslint.configs.recommended,
   {
-    files: ['src/**/*.{ts,tsx}'],
+    files: ['src/**/*.{js,jsx,ts,tsx}'],
     languageOptions: { globals: { ...globals.browser } },
+  },
+  {
+    files: ['src/**/*.{ts,tsx}'],
     plugins: { 'react-hooks': reactHooks, 'react-refresh': reactRefresh },
     rules: {
       ...reactHooks.configs.recommended.rules,
